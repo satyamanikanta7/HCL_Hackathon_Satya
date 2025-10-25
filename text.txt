@@ -102,3 +102,16 @@ A minimal interface a **Streamlit** dashboard.
 - Button to trigger `/notify-admin`  
 
 ---
+
+we need to make looka ll the code very good and modular and clean, not loose any functionality. Also like I am in a
+coding hackathon, they wanted me to build this part, so what details can we send to the Bank dmin, assuming i am building screen for
+Auditor, so like , o a single click firstly things have to happen, like flagging, getting all flagged things and Also
+sending notification, what kind of information dashboard, we can build?
+we need to write the unit tests as well
+don't mess up anything please
+please don't touch the files, which you are not meant to, don't read readme please, don't read text.txt, be safe
+
+next we are building for this auditor, so his screen has these all, and please be careful on onething, that please see the reference folder, it might help, just use the user login and authentication from it, and nothing else, like use in the sense that, see that and write your own in our backend, ok?
+don't use the reference folder in the code, ok, just see and rewrite, ok?, sqlalchemy, sqllite, file db , these things should be there
+look proeprly and fix, don't do anything unecessarily never use emoji's in comments and check the codes are there, just check how to fix them properly, don't do anything in requirements.txt
+
