@@ -1,0 +1,104 @@
+
+## 11. Example Usage
+
+### 1. Fetch Transactions
+```
+GET /fetch-transactions
+```
+Returns all transactions from the connected Google Sheet.
+
+### 2. Predict Fraud
+```
+GET /predict
+```
+Returns transactions with their fraud probability and flags suspicious ones.
+
+### 3. Get Flagged Transactions
+```
+GET /flagged
+```
+Returns only the transactions above the alert threshold.
+
+### 4. Notify Admin
+```
+POST /notify-admin
+```
+Sends an email summary of suspicious transactions to the admin.
+
+---
+
+## 12. ML Model Training (Offline)
+
+Example: Isolation Forest (Unsupervised)
+
+```python
+from sklearn.ensemble import IsolationForest
+import pandas as pd, joblib
+
+df = pd.read_csv("creditcard.csv")
+X = df.drop("Class", axis=1)
+
+model = IsolationForest(contamination=0.01, random_state=42)
+model.fit(X)
+joblib.dump(model, "ml_model/model.joblib")
+```
+
+---
+
+## 13. Unit Testing
+
+Unit testing ensures that each backend component works correctly and independently.
+
+### Framework
+Use **pytest** and **FastAPI’s TestClient** for automated testing.
+
+### Running Tests
+```bash
+pytest -v
+```
+
+### Example Tests
+
+**tests/test_api.py**
+```python
+from fastapi.testclient import TestClient
+from backend.main import app
+
+client = TestClient(app)
+
+def test_predict_endpoint():
+    response = client.get("/predict")
+    assert response.status_code == 200
+    assert "transactions" in response.json()
+```
+
+**tests/test_model_service.py**
+```python
+from backend.services.model_service import load_model
+
+def test_model_loading():
+    model = load_model("ml_model/model.joblib")
+    assert model is not None
+```
+
+**tests/test_notifier.py**
+```python
+from backend.services.notifier import send_email
+
+def test_email_function():
+    result = send_email("Test Subject", "Test Body", ["admin@example.com"])
+    assert result is True
+```
+
+---
+
+## 14. Admin Dashboard (If time permits)
+
+A minimal interface a **Streamlit** dashboard.
+
+**Recommended Views:**
+- Transactions table with fraud scores  
+- Flagged transactions summary  
+- Button to trigger `/notify-admin`  
+
+---
